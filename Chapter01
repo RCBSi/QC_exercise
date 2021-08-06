@@ -1,0 +1,246 @@
+1p1. express the result of the double-slit experiment in Dirac notation.
+
+    Let constant s represent something at the source,
+    constant 0 represent something at the first slit, constant 1 represent something at the second slit
+    and each real number x represent the position along the measurement wall.
+    The amplitude from the source to the first slit is <0|s>, and for each real number x the amplitude from that slit to x is <x|0>.
+    Likewise for the other slit.
+    The amplitude from the source to x is the sum over slits 'n' of <x|n> * <n|s>, for n in {0,1}.
+    Suppose the distance between the slits is 2d, locate slit n at
+    a position perpendicular to x = (2n-1)*d and suppose
+    <x|n> is a complex amplitude that diminishes normally with x_n = | x - (2n-1)*d |
+    and which has a phase
+    exp(i * frequency * distance traveled)
+    where the distance traveled depends on the distance from the slits to x, as sqrt((x_n)**2 + y**2),
+    where y is the perpendicular distance from the plane of the slits to the plane of the observations.
+    The width of the normal distribution may exceed 90 degrees. E.g.
+    https://courses.lumenlearning.com/austincc-physics2/chapter/27-5-single-slit-diffraction/
+    reports that self-interference produces a visible central maximum of width 41;
+    "the second maximum is only about half as wide as the central maximum," and many maxima
+    are visible. Two dim maxima on each side would indicate that light is
+    significantly difracted over 41*3 degrees.
+    "the central maximum extends 20.7º on either side of the original beam, for a width of about 41º."
+    The absolute values of the amplitudes <x|0> and <x|1> are close, if d << y.
+    The phases of those amplitudes are quite different, if the frequency f is
+    high enough that 1/f < |d(x, 0) - d(x, 1)|,
+    since the phase coming from each slit changes completely when it traverses a distance
+    equal to the wavelength.
+    Symmetry in the experimental setup makes <1|s> = <0|s>.
+    The amplitude from source to x is a constant times a normal distribution times
+    exp(i * frequency * sqrt(y**2 + (x - d)**2)) + exp(i * frequency * sqrt(y**2 + (x + d)**2))
+    I suppose we can calculate that the result is periodic in x.¨
+
+1p2. express the result in Dirac notation of the version of the experiment in which single particles are sent one at a time through the system.
+
+    This equation still holds:
+    <x|s> = <x|0> * <0|s> + <x|1> * <1|s>
+    Now the source is a single particle released. Presumably,
+    <0|s> and <1|s> are constant and equal.
+    Similarly, <x|0> and <x|1> have the same equation, I guess.
+    Why would the absolute value of the amplitude vary normally with x.
+
+1p3. ... and a decision is made to monitor the particle ...
+
+    In this case, if the particle is observed to reach one of the slits, then
+    <1|s> and <0|s> have the values 0 and 1, or 1 and 0.
+    The particle then spreads out normally.
+
+    Its phase is lost in measurement, as
+    the probability distribution of where the particle reaches the measurement screen vs x
+    measures the amplitude * its own complex conjugate.
+    This spread is as surprising to me as the two-slit experiment :-)
+    As a physics nube, I find the diffraction of particles just as weird as passing through 2 slits.
+    Huygens principle: "the waveform is created from every point on the wavefront."
+    https://openstax.org/books/university-physics-volume-3/pages/1-6-huygenss-principle
+
+1p4. How do these results differ?
+
+    Particles passing through slits diffract and spread out perpendicular to the slit.
+    When a particle passes through two slits, interference patterns are observed.
+
+2p1. Investigate the Stern-Gerlach experiment of 1921.
+What was the expectation from classical theory for the outcome and what actually occurred?
+
+    Stern-Gerlach is mentioned on page 50 of Hidary.
+    Electrons deflected by a magnetic field could have their own
+    magnetic dipole oriented with any angle alpha relative to the system.
+        Indeed, we might imagine electron spin orientation to randomly walk on the surface of a sphere.
+        This is done when computing the orientation of a protein such as the anosin-myosin bond;
+        An event sets all the spins to the same direction, after which they wander randomly on the sphere.
+
+        "The simplest model for a two spin molecule undergoing rotational diffusion is the
+        random isotropic walk of the internuclear vector on a sphere",
+            The Dipolar InteractionUnder All Angles, GUY LIPPENS, JEAN JEENER.
+
+    "Rotational diffusion" certainly suggests magnetic dipoles!
+
+    If the particles were classical spinning objects, one would expect
+    the distribution of their spin angular momentum vectors to be random and continuous.
+    Each particle would be deflected by an amount proportional to the dot product of its 
+    magnetic moment with the external field gradient, producing some density distribution 
+    on the detector screen. Instead, the particles passing through the 
+    Stern–Gerlach apparatus are deflected either up or down by a specific amount. 
+    This was a measurement of the quantum observable now known as spin angular momentum, 
+    which demonstrated possible outcomes of a measurement where 
+    the observable has a discrete set of values or point spectrum.
+
+    Years after the experiment, it turned out that what was being measured 
+    was intrinsic angular momentum, not orbital angular momentum.
+    Silver, it turns out, has orbital angular momentum 0.
+    Electrons are spin-1⁄2 particles. These have only two possible 
+    spin angular momentum values measured along any axis,
+    h-bar /2 and negative h-bar /2,
+    a purely quantum mechanical phenomenon.
+    Because its value is always the same, it is regarded as 
+    an intrinsic property of electrons, and
+    is sometimes known as "intrinsic angular momentum"
+    (to distinguish it from orbital angular momentum, which can vary and depends on the presence of other particles).
+
+
+2p2. Here is the postcard that X sent to Y after the experiment. Interpret the results.
+
+    https://faculty.chemistry.harvard.edu/files/dudley-herschbach/files/how_a_bad_cigar_0.pdf?m=1363959307
+    
+    "According to the Bohr model, the space quantization should be only twofold... 
+    which made feasible a decisive test of spatial quantization 
+    using magnetic deflection of an atomic beam... the two oppositely oriented components 
+    should be defleccted outside the width of the original beam. 
+    Classical mechanics, in contrast predicted thhat the atomic magnets would precess 
+    in the field but remain randomly oriented, so the 
+    deflections would only broaden but not split the beam."
+    
+    One would expect a beam with its peak in the center, due to atoms with spin perpendicular to the machine. 
+    Instead, there particles landed on the detector in a ring, 
+    leaving a hole where the peak might have been. 
+    The particles had been defleccted outside the width of the original beam.
+
+    Stern and Gerlach produced strong evidence of
+    real spatial quantization as Bohr advocated in his model of the atom, 
+    vs a classical model. 
+
+2p3. Express the results of the SG experiment in Dirac notation.
+
+    wiki:
+    In mathematical terms, the initial state of the particles is
+    |ψ⟩ =c_1 times |ψ j= +ℏ/2⟩ + c_2|ψ j= -ℏ/2⟩
+    where constants c_1 and c_2 are complex numbers.
+    This initial state spin can point in any direction. The squares of the absolute values
+    |c_1|^2 and |c_2|^2
+    determine the probabilities that for a system in the initial state
+    |ψ⟩ one of the two possible values of j is found after the measurement is made.
+    The constants c_1 and c_2 must also be normalized in order that the probability
+    of finding either one of the values be unity. So c_1 and c_2 have four degrees of freedom, R^4,
+    subject to one constraint, so that c_1 and c_2 describe some real (w,x,y,z) on the 4-sphere.
+        This doesn't determine the constants, because they are complex numbers.
+    Therefore, the measurement yields only the squared magnitudes of the constants,
+    which are interpreted as probabilities.
+
+3p1. Given the Landauer bound of kTln2: compute the dissipation of energy in a system where there are five erasures of bits.
+
+    n=5.
+    k = Boltzmann's constant = 1.38064852 × 10-23 Joules / K
+    T = temperature = 300 Kelvin,
+    ln2 = 0.7
+    their product = 1,435 * 10^-20 Joules.
+
+4p1. Is every state represented in a Hilbert space a superposition of other states?
+
+    Yes. change basis.
+
+    As to infinite bases --
+    https://math.stackexchange.com/questions/620667/gram-schmidt-in-hilbert-space
+
+5p1. Born's rule tells us that the square of the modulus of the amplitude of a state gives 
+us the probability of observing that outcome upon measurement. Why?
+
+    https://en.wikipedia.org/wiki/Born_rule
+    says:
+    if an observable corresponding to a self-adjoint operator A
+    with discrete spectrum
+    is measured in a system
+    with normalized wave function |ψ⟩
+    the measured result will be one of the eigenvalues of A.
+    As to why, wiki suggests: "Derivation from more basic principles":
+
+    Gleason's theorem shows that the Born rule can be derived
+    from the usual mathematical representation of measurements in quantum physics
+    together with the assumption of non-contextuality.
+    Andrew M. Gleason first proved the theorem in 1957...
+    ... theorem was historically significant for the role it played in
+    showing that wide classes of hidden-variable theories are inconsistent
+    with quantum physics.
+
+    Andrew Gleason, Measures on the Closed Subspaces of a Hilbert Space, Indiana Univ. Math. J. 6 No. 4 (1957), 885–893
+    (which I cannot yet digest nor relate to QC)
+    But the answer as to "why" may be "measure theory of Hilbert spaces."
+
+    https://en.wikipedia.org/wiki/Measurement_in_quantum_mechanics#%22Observables%22_as_self-adjoint_operators
+
+    The eigenvectors of a von Neumann observable form an 
+    orthonormal basis for the Hilbert space, and each possible 
+    outcome of that measurement corresponds to one of the 
+    eigenvectors = vectors comprising the basis. 
+    A density operator is a positive-semidefinite operator on 
+    the Hilbert space whose trace is equal to 1.[1][2] 
+    For each measurement that can be defined, the probability 
+    distribution over the outcomes of that measurement can be 
+    computed from the density operator. 
+    The procedure for doing so is the Born rule...
+
+    https://en.wikipedia.org/wiki/Born_rule
+
+    if an observable corresponding to a self-adjoint operator A 
+    with eigenvalue lambda corresponding to eigenspace E
+    is measured in a system with normalized wave function |psi>
+    then let P_E be the projectoin of the Hilbert space onto E,
+    and:
+    the probability of measuring the eigenvalue lambda
+    will equal <phi|P_E|phi> which indicates why the probability
+    is the square of the modulus of the amplitude. 
+
+    Suppose E is spanned by a single vector, v. 
+    Represent phi and P_E in the same basis, so that P_E is 
+    a diagonal matrix which is 
+    zero except at column v and row v. This could be written
+    as the tensor product of (0...,0,1,0...0) with itself, 
+    the 1 occurring at basis vector v. Represent phi in this
+    basis and supppose the coefficient of v in phi is the 
+    complex coefficient c. Then as <phi| is the conjugate
+    transpose of |phi> 
+
+    https://en.wikipedia.org/wiki/Conjugate_transpose
+
+    then <phi|P_E|phi> is the conjugate of c times c itself and
+    the probability of measuring tthe eigenvalue lambda is:
+    |c|^2.
+
+    So, another answer to "why" is: "because <phi| is not the     
+    transpose of |phi> , but the conjugate transpose."
+    
+
+6p1. What does non-separable mean for two states, and what does that tell us about these states?
+
+    https://en.wikipedia.org/wiki/Separable_state
+
+    If a pure state in a composite system can be written as
+    the tensor product of pure states in the component systems,
+    it is said to be separable. Otherwise it is called entangled.
+
+    Consider the qubits (a,b) and (c,d) The tensor product 
+    (ac, ad)
+    (bc, bd)
+    or (ac,ad,bc,bd)
+    is separable. 
+
+    The state is separable just in case 
+    the descriminant of the matrix is zero. 
+
+    E.g. 
+    (1,2)
+    (3,6)
+    is separable, and 
+
+    (1,0)
+    (0,1)
+    written in dirac notation as |00> + |11> is not.
+
