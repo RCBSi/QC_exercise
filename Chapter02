@@ -1,0 +1,325 @@
+1a. Two qubits. Initialize each to state |0>.
+Apply H to one qubit, whose state is now evenly
+shared between states |0> and |1> with no phase.
+The first qubit has state (1,1) and the other (1,0),
+so the state of the entire system is now (1,0,1,0).
+Now we use the first qubit as the control in a
+CNOT transformation of the second bit, where CNOT
+is represented by the matrix:
+((1000)
+ (0100)
+ (0001)
+ (0010))
+resulting in state: (1,0,0,1).
+That's |00> + |11>.
+
+1b. Three qubits in base state. In dirac notation, 
+Hyields (|00> + |10>) * sqrt(2)/2, then 
+CNOT yields |00> + |11> by the logic
+"when the first bit is 1, the second bit switches"
+
+CNOT for 2 qubits takes 00 => 00, 01 => 01, 10 => 11, 11 => 10.
+
+For 3 qubits, CNOT on the last two qbits takes bases:
+000,001,010,011 => 000,001,011,010 and
+100,101,110,111 => 100,101,111,110. As a matrix it looks like
+
+10000000
+01000000
+00010000
+00100000
+00001000
+00000100
+00000001
+00000010
+
+Applying that to (1,0,0,0,0,0,1,0) yields
+(1,0,0,0,0,0,0,1), 
+the same as dirac-notation reeasoning:
+
+In ket notation, H,CNOT yield |000> + |110>, after which
+CNOT yields |000> + |111> by the logic
+"when the second bit is 1, the third bit switches."
+
+1c. H,CNOT yield |00> + |11>, after which
+CNOT yields |00> + |01>
+and the final CNOT leaves this unchanged.
+This is equivalent to H on the second bit.
+
+2. What is the transformation between literal
+S^2 = the unit vectors in R^3 and
+the projective line C^2 / C ?
+
+https://en.wikipedia.org/wiki/Complex_projective_space
+
+Complex projective line homeomorphic to 2-sphere.
+
+A formula here
+https://math.stackexchange.com/questions/1316488/explicit-fractional-linear-transformations-which-rotate-the-riemann-sphere-about
+identifies the complex projective line C^2/C and S^2 as isomorphic.
+
+Map S^2 as a subset of R^3 to the complex projective line C^2/C sending:
+    (x,y,z) to 1*|0> + (x + i*y)/(1-z)*|1>
+    unless z = 1; in that case, send
+    (0,0,1) to 1*|0> + 0*|1>
+
+(if z = 1, the formula (x + i*y)/(1-z) is formally 0/0 )
+
+For the inverse from C^2/C , given 1*|0> + (x + i*y)|1> ,
+    let c = 2/(x^2 + y^2 + 1) and
+    map to (c*x, c*y, (1-c)).
+
+Under this mapping, the rotations SO(3) become the fractional linear
+transformations on the second coefficient in 1*|0> + (x + i*y)/(1-z)*|1>
+which are the linear transformations on both coefficients.
+
+2a. (0,0,1)
+2b. (0,0,-1)
+2c. x=1, y=0 => (1,0,0)
+2d. x + iy = e^(i*theta) => |z| = 1, c = 1, so
+    (cos(theta),sin(theta), 0)
+    pi/2 => (0,1,0)
+    pi => (-1,0,0)
+    3pi/2 => (0,-1,0)
+2e. Write the state as (1*|0> + (x+iy)*|1>) *1/(x*2+y^2+1) and translate.
+    for 1*|0> + 4/3*|1> , 
+    x^2+y^2 = 16/9, c = 18/25; c*x = 24/25, so
+    1*|0> + 4/3*|1> => (24/25,0,7/25).
+
+3a. Find a sequence of unary unitary operations A_i
+such that (3/5, 4/5) = A_0... A_n (1,0) .
+
+    Let theta be the angle such that
+    e^(i*theta) = cos(theta)+i*sin(theta) = (-7 - 24i)/25, and
+    R_theta is the matrix:
+    ((1,0),
+    (0, (-7 - 24i)/25))
+    Now:
+    (3/5, 4/5) = S^3 H R_theta H (1,0).
+    
+
+Proof:
+    H (1,0) = (1,1) * sqrt(2)/2
+    R_theta maps to => (1 , (-7 -24i)/25) * sqrt(2)/2
+    Note that (-7 -24i) / 25 = (3 - 4i) / (3 + 4i), so
+    R_theta H (1,0) = (1, (3 - 4i) / (3 + 4i)) * sqrt(2)/2
+    Note that
+    1 + (3 - 4i) / (3 + 4i) = (3+4i + 3 - 4i) / (3+4i) = 6 / (3+4i)
+    and
+    1 - (3 - 4i) / (3 + 4i) = (3+4i - 3 + 4i) / (3+4i) = 8i / (3+4i)
+    So H R_theta H (1,0) = (6, 8i) * 1/(3+4i) * sqrt(2)/2
+    S^3 H R_theta H (1,0) = (6,8) * 1/(3+4i) * sqrt(2)/2
+    modulo C this is (3/5, 4/5).
+
+NB: HS maps the x-z plane to the x-y plane:
+    In reaching specific points on the x-z plane, the transformation HS is useful:
+    it takes the circle of real-valued (x,z) in C^2/C to the circle of qubits
+    that are evenly balanced, but whose phase can be anything.
+
+    HS as a matrix is:
+    ((1,i),
+    (1,-i))
+    which takes (x,z) to (x+iz, x-iz), which clearly is evenly balanced.
+
+3b. Write (1,e^(i*theta)) as A_1... A_n (1,0).
+
+    (1,e^(i*theta)) = R_theta H (1,0) .
+
+4a,b. No, these are Clifford operators (Hidary p.31)
+
+4c,d. Yes, these contain CNOT, S, T as in:
+P. O. Boykin, T. Mor, M. Pulver, V. Roychowdhury, and F. Vatan. On universal and fault-tolerant quan- tum computing. arXiv preprint quant-ph/9906054, 1999.
+"basis consists of two single-qubit gates (Hadamard and σz1/4), and one double-qubit gate (Controlled-NOT)"
+https://arxiv.org/pdf/quant-ph/9906054.pdf
+
+How are CNOT,S and T supposed to generate R_theta for arbitrary theta? Maybe they're not? Is it enough that they cover six points on the unit sphere?
+Boykin etc. seem to generate a
+*field* of matrices in which 
+approximations suffice, so that once we have 
+generated matrix X, also exp(X) is approximated,
+but they call it a Group, suggesting no addition
+of matrices would be allowed.
+
+http://home.lu.lv/~sd20008/papers/essays/Clifford%20group%20[paper].pdf
+suggests also that groups, not fields, are being used. E.g., that 
+"A classical result says that all finite groups of rotations in 
+R^3 that do not have an invariant 2-dimensional subspace are 
+rotational symmetry groups of Platonic solids. Since there is no other 
+Platonic solid, whose rotational symmetry group properly contains that 
+of a cube, the group obtained by adding any gate to C_1 must be infinite."
+
+4e. H,S,CZ
+CZ = H then X then H; these are Clifford operators.
+
+4f. H,T,CZ
+CNOT = H then CZ then H; these are universal.
+
+4g. U, CNOT for arbitrary single qbit rotations U.
+
+4h. U, CZ where U is an arbitrary single qubit rotation.
+
+5. For any Pauli operator sigma, sigma^2 = the identity.
+Expanding exp(i*sigma*theta) into a power series, sigma
+disappears from the even terms, so cos(theta); sigma
+appears in the odd terms always as sigma, and everything
+else is a constant, and constants commute with sigma, s
+o the odd terms sum to i*sin(theta) * sigma. 
+
+6. Using the foregoing, exp(i*theta/2*sigma) is
+cos(theta/2) on the main diagonal plus i*sin(theta/2)*sigma.
+
+7. We'd expect this, as:
+e^x * e^y = e^(x+y) and given teh definition in part 6
+of R_x, R_y and R_z as exp(i*theta/2*sigma), so that
+for angles theta_1 andd theta_2, 
+exp(i*(theta_1 + theta_2)/2*sigma) = 
+exp(i*(theta_1)/2*sigma) * exp(i*(theta_2)/2*sigma)
+It's fair to ask: if exp of a matrix is defined by the Taylor series,
+can we still expect exp to translate addition into
+multiplication? 
+
+Checking this with multiplication of matrices requires
+some highschool identities for cos(alpha+beta) and 
+sin(alpha+beta) in terms of 
+cos(alpha) and sin(alpha).
+
+8. Apparently the phase shift between the two spins is
+a real property that can carry information and influence
+the results of other processes. Recording the amplitude
+difference between the two spins as a ratio of real
+values wouldn't capture the phase difference. One would
+have to keep track of it elsewhere in order to predict
+how the qubit will respond e.g. to a physical
+implementation of the S operator which multiplies
+one complex amplitude by i.
+
+Five qubits are the tensor product of five copies of
+the projective line C^2/C.
+
+9. Given qubit (3,4)
+the probability of measuring |0> is  9/25 or 36% and
+the probability of measuring |1> is 16/25 or 64%.
+
+10. After measuring 1, we will measure 1 again,
+with probability 1.
+
+Measurement projects "the wavefunction of
+the system irreversibly into the corresponding
+eigenfunction. The standard example of such a
+measurement is the Stern-Gerlach experiment
+in which the z-component of a spin-1/2 particle
+is projected into one of its two eigenvalues."
+
+-- https://arxiv.org/pdf/cond-mat/9612126.pdf
+
+11. The tensor product of n-many m-qudits has
+dimension m^n, the same size as
+the tensor product of n vectors of length m.
+2^(10^6) = 2^(2*5*10^5) = 4^(5*10^5) ;
+more generally,
+2^(10^6) = d^(c) for which c?
+10^6 = c log(d)/log(2) ;
+c = 10^6 * log(2)/log(d).
+If d = 4, that ratio is 1/2,
+so c = 5*10^5.
+
+The factor log(2)/log(d) indicates that
+storing more information per qudit is
+exponentially less useful than increasing
+the number of qudits.
+
+12a.
+(1,1)
+(1,-1)
+*
+(0,1)
+(1,0)
+*
+(1,1)
+(1,-1)
+
+is a linear transformation taking:
+(1,0) => (1,1) => (1,0) and
+(0,1) => (1,-1) => (-1,1) => (0,-1), i.e.,
+
+HXH=
+(1,0),
+(0,-1)
+
+12b. H is its own inverse (see 12d), so from the foregoing:
+
+X = H HXH H = H Z H
+
+12c.
+(1,1)
+(1,-1)
+*
+(0,-i)
+(i,0)
+*
+(1,1)
+(1,-1) *1/2
+
+=
+((i,-i),
+(-i,-i)
+*
+(1,1)
+(1,-1) * 1/2
+=
+(0,2i)
+(-2i,0) * 1/2
+= -Y.
+
+12d.
+multiplying H by H, the off-diagonal
+elements sum to 0, leaving the identity.
+
+12e.
+CNOT_01 in which the first qubit decides whether to
+flip the second, has matrix representation:
+1000
+0100
+0001
+0010
+CNOT_10 in which the sccond qubit decides whether to
+flip the first, has matrix representation:
+1000
+0001
+0010
+0100
+That is, under CNOT_01 :
+|00> maps to |00> because the second bit is 0.
+|10> maps to |10> because the second bit is 0.
+|01> maps to |11> because the second bit is 1.
+|11> maps to |01> because the second bit is 1.
+
+CNOT_01 is its own inverse;
+
+these are permutation matrices; writing the base
+elements as 1,2,3,4, in permutation notation they are:
+CNOT_01 is (3,4)
+CNOT_10 is (2,4)
+CNOT_01 is (3,4)
+and their concatenation sends
+1=>... =>1
+2=>2=>4=>3
+3=>4=>2=>2
+4=>3=>3=>4
+which is the permutation SWAP_01.
+
+12f. CNOT is a permutation matrix which is the identity
+on two bases and a transposition on the other bases.
+R is a diagonal matrix with interesting nontrivial values
+on the two bases fixed by CNOT, and which takes the
+same value, 1, on the bases which CNOT permutes.
+
+Thus, CNOT * R * CNOT^(-1) is the operation R, with its
+rows and columns permuted as per CNOT, but that
+permutation fixes the values e^(i* theta) and
+e^(i* -1* theta) in place in R and only permutes the
+values 1 between themselves. Thus
+
+CNOT * R * CNOT^(-1) = R, and
+
+CNOT and R commute.
