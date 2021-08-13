@@ -1,0 +1,120 @@
+Chapter 4
+
+1. factoring and discrete logarithm
+    https://crypto.stackexchange.com/questions/9385/reduction-of-integer-factorization-to-discrete-logarithm-problem
+
+
+2. What's the complexity of graph isomorphism?
+
+P-time and faster than n^2.
+    A problem statement such as: "is G isomorphic to H" requires listing the edges of G and H. That will be d*n, where d is the
+        average degree.
+
+    Maybe checking the "EC" values is sufficient for deteriming GI:
+        https://arxiv.org/pdf/1511.06620.pdf
+        Use of Eigenvector Centrality to Detect Graph Isomorphism
+        Dr. Natarajan Meghanathan Professor of Computer Science Jackson State University
+        Conjecture: There are no pairs of nonisomorphic graphs with identical eigenvector centrality sequences.
+
+    EC computational methods are fast, so this would make graph isomorphism P-time and fast.
+    One paper reports eigenvector centrality to require O(v^3) time.
+        http://www.jsums.edu/nmeghanathan/files/2016/01/CSC641-Sp2016-Module-3-Centrality-Metrics.pdf?x61976
+    Oracle reports n-log n complexity for approximate EC values.
+        https://docs.oracle.com/cd/E56133_01/2.4.1/reference/algorithms/eigenvector_centrality.html
+        one input is the maximum tolerated error value.
+
+    Proofs that graph isomorphism is thus solved may be lacking simply because
+        it's hard to prove isomorphism between finite objects.
+        Model theory books construct infinite models satisfying certain types and prove them to be isomorphic.
+        Proving isomorphism between finite objects is harder.
+    If the "nonisomorphism => different EC sequence"
+    conjecture is true but remains unproved,
+    then time complexity is polynomial in fact,
+    though not proved via the conjecture.
+
+Intermediate:
+    "it is not NP-complete unless the polynomial time hierarchy collapses to its second level."
+    If graph automorphisms are harder than P and yet the PTime hierachy doesn't collapse, then
+    graph isomorphism would be between P-time and NP-time.
+
+NP-complete or worse!
+    The space of bijections between graphs is exponential in size.
+    Searching for an isomorphism is slow.
+    Group theory is involved, and group theory is hard.
+    Graphs can encode things logically; maybe graphs and their automorphisms can encode and
+        then pass undetected through all the graph metrics like EC.
+    Maybe an algorithm that finds all those automorphisms must
+        explicitly search the space of functions between the graphs.
+
+Exponential:
+    Not *that* slow, says Babai.
+    2017: "Babai claimed quasi-polynomial runtime, with Helfgott confirming..."
+    https://en.wikipedia.org/wiki/Graph_isomorphism
+
+    Since "search all functions" is Exp-time,
+    Babai has a GI algorithm
+    that provably beats brute force.
+
+3. Inspired by QC, Erwin Tang found a new classical Machine learning algorithm.
+    It solves the recommendation problem.
+
+    There exists a matrix n x m of n users and m products indicating
+        the user's utility for each product.
+    The matrix is a tensor product of lower-rank matrices plus some random noise,
+        Tensor + Noise.
+
+    Input: we are given a sample from Tensor + Noise.
+
+    Output: guess the original matrix and return the sorted list of the top-k elements of each row,
+    i.e., offer to each customer the products with highest utility, in descending order.
+    
+The problem involves, as far as I can see it, at least two problems that are often solved 
+separately in practice: 
+
+* "collaborative filtering": 
+  a customer has not declared 
+  a preference for a high-utility product, but the 
+  almost-tensor-of-lower-rank assumption
+  puts this customer in a cluster with other customers 
+  with high utility for that product, so we recommend
+  "customers similar to you liked this product."
+ 
+* sorting a matrix under the assumption that it is almost-lower-rank. 
+  In practice, it would be bad to sort each custome separately. 
+  The comparisons made while sorting the first row would be very relevant 
+  when sorting any row for a customer in a similar cluster. 
+
+3a What was Tang’s strategy in “dequantizing” the quantum algorithm?
+
+    The input is a selection from the matrix;
+    The QC estimates in O(log(input-size)) the vectors and eigenvalues of the matrix.
+
+    "the quantum algorithm just samples from the low-rank approximation
+    of an input matrix. It proceeds as follows. First, an application
+    of phase estimation implicitly estimates singular values and
+    locates singular vectors of the input. A quantum projection
+    procedure then uses this information to project
+    a quantum state with a row of the input
+    to a state with the corresponding row
+    of a low-rank approximation of the input.
+    Measuring this state samples an entry from
+    the row with probability proportional to its magnitude.
+    Kerenidis and Prakash posited that, with a classical algorithm,
+    producing samples following these distributions
+    requires time linear in the input dimensions.
+
+    The intuition behind this claim is not
+    that singular value estimation or
+    computing projections is particularly
+    difficult computationally. Rather,
+    it’s simply hard to believe that
+    any of these steps can be done
+    without reading the full input.
+    --Tang 2019
+
+    Tang's strategy will be to estimate the low-rank approximation
+    in O(log(input-size)).
+
+3b Are there other problems that may be open to classical speedup?
+
+Yes, according to the blog. 
